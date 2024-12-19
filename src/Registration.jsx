@@ -29,7 +29,7 @@ export default function Registration() {
     }
 
     try {
-      const response = await axios.post('http://192.168.1.8:5000/api/users/register', {
+      const response = await axios.post('http://localhost:5000/api/users/register', {
         email,
         password,
       }, { timeout: 10000 });
