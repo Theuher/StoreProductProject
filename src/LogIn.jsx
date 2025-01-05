@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useDispatch } from 'react-redux'; // Redux Hook
+import { setToken, setUser } from './authSlice'; // Redux Action
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function LogIn() {
@@ -10,6 +12,7 @@ export default function LogIn() {
   const [errorMessage, setErrorMessage] = useState('');
 
   const navigate = useNavigate();
+  const dispatch = useDispatch(); 
 
   const handleClick = () => {
     navigate('/Home');
@@ -27,13 +30,15 @@ export default function LogIn() {
 
     try {
       const response = await axios.post(
-        'http://192.168.1.8:5000/api/users/login',
+        'http://192.168.2.119:5000/auth/login',
         { email, password },
         { timeout: 10000 }
       );
 
-      const user = response.data;
-      localStorage.setItem('currentUser', JSON.stringify(user));
+      const token = response.data.user.token;
+      console.log(token)
+      dispatch(setToken(token));
+      dispatch(setUser(response.data.user.email));
 
       setErrorMessage(null);
       setEmail('');
