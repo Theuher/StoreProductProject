@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { clearToken, clearUser } from './authSlice';
-import { useEffect, useState } from 'react';
 import { useAuth } from './useAuth';
 
 
@@ -11,14 +10,8 @@ export default function Home() {
   const navigate = useNavigate();
  const dispatch = useDispatch(); 
  const isAuthenticated = useAuth();
-  // const currentUser = JSON.parse(localStorage.getItem('currentUser'));
   const token = useSelector((state) => state.auth.token);
   const email = useSelector((state) =>  state.auth.user);
-  
-  const [users , setUsers] = useState([]);
-  const [error , setError] = useState("");
-
-
   const handleLogOut = () => {
     // localStorage.removeItem('currentUser');
     dispatch(clearToken());

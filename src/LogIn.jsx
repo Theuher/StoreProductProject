@@ -30,7 +30,7 @@ export default function LogIn() {
 
     try {
       const response = await axios.post(
-        'http://192.168.2.119:5000/auth/login',
+        'http://localhost:5000/auth/login',
         { email, password },
         { timeout: 10000 }
       );

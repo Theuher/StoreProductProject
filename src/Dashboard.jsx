@@ -41,7 +41,7 @@ export default function Dashboard() {
         }
   
         const response = await axios.get(
-          'http://192.168.2.119:5000/allUsers',
+          'http://localhost:5000/allUsers',
           {
             headers : {Authorization : `Bearer ${token}`}
           });
@@ -96,9 +96,9 @@ export default function Dashboard() {
     users.map((user) => (
       <div key={user.id} className="card mb-3 rounded" style={{ border: '2px solid black', borderRadius: '4px' , width: '80%'}}>
         <div className="card-body">
-          <h5 className="card-title">User ID: {user.id}</h5>
+          <h5 className="card-title">Хэрэглэгчийн ID: {user.id}</h5>
           <p className="card-text"><strong>Email:</strong> {user.email}</p>
-          <p className="card-text"><strong>Password:</strong> {user.password}</p>
+          <p className="card-text"><strong>Нууц үг:</strong> {user.password}</p>
         </div>
       </div>
     ))
