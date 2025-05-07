@@ -8,6 +8,8 @@ import './App.css';
 import store from './store';
 import { useAuth } from './useAuth';
 import { Provider } from 'react-redux';
+import AiPage from './AiPage';
+import AiForm from './aiForm/AiForm.jsx';
 
 function AppContent() {
 
@@ -23,6 +25,8 @@ function AppContent() {
           {isAuthenticated && (
             <>
               <Route path="/Dashboard" element={<Dashboard />} />
+              <Route path="/AiPage" element={<AiPage />} />
+              <Route path="/AiForm" element={<AiForm />} />
             </>
           )}
           <Route path='*' element = {<Navigate to="/Login"/>}/>

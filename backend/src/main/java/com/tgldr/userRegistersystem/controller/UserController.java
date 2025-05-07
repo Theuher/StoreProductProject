@@ -1,6 +1,7 @@
 package com.tgldr.userRegistersystem.controller;
 
 
+import com.tgldr.userRegistersystem.dto.AiModelDTO;
 import com.tgldr.userRegistersystem.dto.ReqRes;
 import com.tgldr.userRegistersystem.service.UsersManagementService;
 import org.apache.coyote.Response;
@@ -20,7 +21,7 @@ public class UserController {
 
     @PostMapping("/auth/register")
     public ResponseEntity<?> register(@RequestBody ReqRes request){
-        System.out.println("Register request irlee: "+ request.getEmail()+" , "+ request.getPassword());
+//        System.out.println("Register request irlee: "+ request.getEmail()+" , "+ request.getPassword());
         try{
             ReqRes res = usersManagementService.register(request);
             res.setPassword(null);
@@ -33,7 +34,7 @@ public class UserController {
     }
     @PostMapping("/auth/login")
     public ResponseEntity<?> login(@RequestBody ReqRes request){
-        System.out.println("Login request irlee: "+ request.getEmail()+" , "+ request.getPassword());
+//        System.out.println("Login request irlee: "+ request.getEmail()+" , "+ request.getPassword());
         return new ResponseEntity<>(Map.of("user" , usersManagementService.login(request)) , HttpStatus.OK);
     }
     @PostMapping("/auth/refresh")
