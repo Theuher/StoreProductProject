@@ -91,7 +91,7 @@ public class AiService {
 
         HttpEntity<Map<String, String>> request = new HttpEntity<>(requestBody, headers);
 
-        String flaskUrl = "http://172.16.151.68:4000/predict";
+        String flaskUrl = "http://172.16.148.114:4000/predict";
 
         try {
             ResponseEntity<Map> response = restTemplate.postForEntity(flaskUrl, request, Map.class);
