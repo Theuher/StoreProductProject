@@ -9,7 +9,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: theuher/storeproductproject
 
 jobs:
   deploy:
@@ -43,24 +43,34 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Set image names (lowercase)
+        id: set-image-names
+        run: |
+          REPO_LOWER=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          echo "IMAGE_NAME=$REPO_LOWER" >> $GITHUB_ENV
+          echo "Backend image: ${{ env.REGISTRY }}/$REPO_LOWER-backend"
+          echo "Frontend image: ${{ env.REGISTRY }}/$REPO_LOWER-frontend"
+
       - name: Build and push backend image
         working-directory: ./backend
         run: |
           mvn clean package -DskipTests
-          docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-backend:${{ github.sha }} .
-          docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-backend:latest .
-          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-backend:${{ github.sha }}
-          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-backend:latest
+          REPO_LOWER=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          docker build -t ${{ env.REGISTRY }}/$REPO_LOWER-backend:${{ github.sha }} .
+          docker build -t ${{ env.REGISTRY }}/$REPO_LOWER-backend:latest .
+          docker push ${{ env.REGISTRY }}/$REPO_LOWER-backend:${{ github.sha }}
+          docker push ${{ env.REGISTRY }}/$REPO_LOWER-backend:latest
 
       - name: Build and push frontend image
         working-directory: .
         run: |
           npm ci
           npm run build
-          docker build -f Dockerfile.frontend -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend:${{ github.sha }} .
-          docker build -f Dockerfile.frontend -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend:latest .
-          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend:${{ github.sha }}
-          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend:latest
+          REPO_LOWER=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          docker build -f Dockerfile.frontend -t ${{ env.REGISTRY }}/$REPO_LOWER-frontend:${{ github.sha }} .
+          docker build -f Dockerfile.frontend -t ${{ env.REGISTRY }}/$REPO_LOWER-frontend:latest .
+          docker push ${{ env.REGISTRY }}/$REPO_LOWER-frontend:${{ github.sha }}
+          docker push ${{ env.REGISTRY }}/$REPO_LOWER-frontend:latest
 
       # Optional: Deploy to server (uncomment and configure)
       # - name: Deploy to production
