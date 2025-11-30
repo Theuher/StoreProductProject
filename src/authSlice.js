@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 // Initial state
 const initialState = {
   token: null,
-  email :null
+  email :null,
+  user: null,
 };
 
 // Create auth slice

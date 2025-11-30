@@ -41,3 +41,111 @@
    - Байршил өөрчлөгдөхөд автоматаар шинэчлэх
    - Админд борлуулалт болон барааны хөдлөлтийн тайлан гаргах
 
+---
+
+## 🚀 CI/CD Pipeline
+
+![CI](https://github.com/Theuher/StoreProductProject/workflows/CI%20-%20Build%20and%20Test/badge.svg)
+![CD](https://github.com/Theuher/StoreProductProject/workflows/CD%20-%20Deploy/badge.svg)
+
+Энэ төсөл нь GitHub Actions ашиглан автомат CI/CD pipeline-тай.
+
+### CI (Continuous Integration)
+- ✅ Автомат build ба test
+- ✅ Backend (Spring Boot) ба Frontend (React) build
+- ✅ Docker image үүсгэх
+- ✅ Pull Request дээр автомат шалгалт
+
+### CD (Continuous Deployment)
+- ✅ Main branch руу push хийхэд автомат deploy
+- ✅ GitHub Container Registry руу Docker image push
+- ✅ Production server руу deploy (optional)
+
+**Дэлгэрэнгүй мэдээлэл:** 
+- [CI_CD_SETUP.md](./CI_CD_SETUP.md) - CI/CD тохируулах заавар
+- [GITHUB_SETUP.md](./GITHUB_SETUP.md) - GitHub repository тохируулах заавар
+
+**GitHub Repository:** [https://github.com/Theuher/StoreProductProject](https://github.com/Theuher/StoreProductProject)
+
+---
+
+## 🛠️ Технологийн стек
+
+### Frontend
+- React 18
+- Vite
+- Redux Toolkit
+- Bootstrap 5
+- React Router
+
+### Backend
+- Spring Boot 3.4.1
+- Java 17
+- Spring Security + JWT
+- MySQL (Users)
+- MongoDB (Products, Reports, etc.)
+
+### DevOps
+- Docker & Docker Compose
+- GitHub Actions
+- Nginx
+
+---
+
+## 📦 Суулгах заавар
+
+### Шаардлага
+- Node.js 20+
+- Java 17+
+- Maven 3.8+
+- Docker & Docker Compose (optional)
+- MySQL 8.0
+- MongoDB 7.0
+
+### Local Development
+
+```bash
+# 1. Repository clone хийх
+git clone https://github.com/your-username/your-repo.git
+cd StoreProductProject
+
+# 2. Frontend dependencies суулгах
+npm install
+
+# 3. Backend build хийх
+cd backend
+mvn clean install
+
+# 4. Database тохируулах
+# MySQL ба MongoDB ажиллуулах
+
+# 5. Application.properties тохируулах
+# backend/src/main/resources/application.properties
+
+# 6. Backend ажиллуулах
+mvn spring-boot:run
+
+# 7. Frontend ажиллуулах (шинэ terminal)
+cd ..
+npm run dev
+```
+
+### Docker ашиглан ажиллуулах
+
+```bash
+# Бүх services ажиллуулах
+docker-compose up -d
+
+# Logs харах
+docker-compose logs -f
+
+# Зогсоох
+docker-compose down
+```
+
+---
+
+## 📝 License
+
+[Add your license here]
+

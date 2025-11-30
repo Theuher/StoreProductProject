@@ -50,4 +50,19 @@ public class UserController {
     public  ResponseEntity<ReqRes> getUserById(@PathVariable("id") long userId){
         return ResponseEntity.ok(usersManagementService.getUserById(userId));
     }
+    @PutMapping("/user/{id}")
+    public ResponseEntity<?> updateUserProfile(
+            @PathVariable("id") Long userId,
+            @RequestBody ReqRes request
+    ) {
+        try {
+            ReqRes updatedUser = usersManagementService.updateUserProfile(userId, request);
+            updatedUser.setPassword(null); // don't send password back
+            return ResponseEntity.ok(Map.of("user", updatedUser));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("errorMessage", "Профайл шинэчлэхэд алдаа гарлаа."));
+        }
+    }
+
 }

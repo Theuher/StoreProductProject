@@ -10,6 +10,7 @@ import { useAuth } from './useAuth';
 import { Provider } from 'react-redux';
 import AiPage from './AiPage';
 import AiForm from './aiForm/AiForm.jsx';
+import Profile from './Profile.jsx';
 
 function AppContent() {
 
@@ -27,6 +28,7 @@ function AppContent() {
               <Route path="/Dashboard" element={<Dashboard />} />
               <Route path="/AiPage" element={<AiPage />} />
               <Route path="/AiForm" element={<AiForm />} />
+              <Route path="/Profile" element={<Profile />} />
             </>
           )}
           <Route path='*' element = {<Navigate to="/Login"/>}/>

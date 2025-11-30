@@ -64,6 +64,7 @@ public class UsersManagementService {
             var user = usersRepo.findByEmail(loginRequest.getEmail()).orElseThrow();
             var jwt = jwtUtils.generateToken(user);
             var refreshToken = jwtUtils.generateRefreshToken(new HashMap<>(), user);
+            response.setUser(user);
             response.setEmail(user.getEmail());
             response.setStatusCode(200);
             response.setToken(jwt);
@@ -140,4 +141,27 @@ public class UsersManagementService {
         }
         return response;
     };
+
+    public ReqRes updateUserProfile(Long userId, ReqRes request) throws Exception {
+        User user = usersRepo.findById(userId)
+                .orElseThrow(() -> new Exception("Хэрэглэгч олдсонгүй"));
+
+        User reqUser = request.getUser();
+        if(reqUser != null){
+            if(reqUser.getFirstName() != null) user.setFirstName(reqUser.getFirstName());
+            if(reqUser.getLastName() != null) user.setLastName(reqUser.getLastName());
+            if(reqUser.getAge() != null) user.setAge(reqUser.getAge());
+            if(reqUser.getGender() != null) user.setGender(reqUser.getGender());
+            if(reqUser.getImage() != null) user.setImage(reqUser.getImage());
+        }
+
+        usersRepo.save(user);
+
+        ReqRes res = new ReqRes();
+        res.setUser(user);
+        return res;
+    }
+
+
+
 }

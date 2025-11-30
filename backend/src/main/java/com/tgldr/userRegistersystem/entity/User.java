@@ -7,6 +7,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -20,26 +21,16 @@ public class User implements UserDetails {
     @Column(unique = true , nullable = false)
     private String email;
     private String password;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    private String firstName;
+    private String lastName;
+    private Integer age;
+    private String gender;
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
+    private String image;
+    private String userRole;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
